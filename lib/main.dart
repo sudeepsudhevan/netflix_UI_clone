@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflix_clone/core/colors/colors.dart';
 import 'package:netflix_clone/presentation/main_page/screen_main_page.dart';
 
 void main() {
@@ -16,13 +17,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         colorScheme: const ColorScheme.dark(),
+        scaffoldBackgroundColor: backgroundColor,
         textTheme: const TextTheme(
           bodyLarge: TextStyle(color: Colors.white),
           bodyMedium: TextStyle(color: Colors.white),
           bodySmall: TextStyle(color: Colors.white),
         ),
       ),
-      home: const ScreenMainPage(),
+      home: ScreenMainPage(),
     );
   }
 }
