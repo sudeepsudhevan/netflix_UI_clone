@@ -7,6 +7,36 @@ import 'package:netflix_clone/presentation/widgets/app_bar_widget.dart';
 class ScreenDownloads extends StatelessWidget {
   ScreenDownloads({super.key});
 
+  final _widgetList = [
+    const _SmartDownloads(),
+    Section2(),
+    const Section3(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: AppBarWidget(
+          title: "Downloads",
+        ),
+      ),
+      body: ListView.separated(
+        padding: EdgeInsets.all(10),
+        itemBuilder: (ctx, index) => _widgetList[index],
+        separatorBuilder: (ctx, index) => const SizedBox(
+          height: 25,
+        ),
+        itemCount: _widgetList.length,
+      ),
+    );
+  }
+}
+
+class Section2 extends StatelessWidget {
+  Section2({super.key});
+
   final List imageList = [
     "https://image.tmdb.org/t/p/w1280/fiVW06jE7z9YnO4trhaMEdclSiC.jpg",
     "https://image.tmdb.org/t/p/w1280/6KErczPBROQty7QoIsaa6wJYXZi.jpg",
@@ -16,77 +46,101 @@ class ScreenDownloads extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(50),
-        child: AppBarWidget(
-          title: "Downloads",
+    return Column(
+      children: [
+        const Text(
+          "Introducing Downloads for you",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      ),
-      body: ListView(
-        children: [
-          Row(
+        kheight,
+        const Text(
+          "We'll download a personalized selection of \nmovies and shows for you, so there's\n always something to watch on your\n device.",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 16,
+          ),
+        ),
+        SizedBox(
+          width: size.width,
+          height: size.width,
+          //color: Colors.white,
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              Icon(
-                Icons.settings,
-                //color: kcolorwhite,
+              CircleAvatar(
+                backgroundColor: Colors.grey.withOpacity(0.5),
+                radius: size.width * 0.35,
               ),
-              Text("Smart Downloads"),
+              DownloadsImageWidget(
+                size: Size(size.width * 0.35, size.width * 0.45),
+                imageList: imageList[2],
+                angle: 18,
+                margin: const EdgeInsets.only(left: 200, top: 50),
+              ),
+              DownloadsImageWidget(
+                size: Size(size.width * 0.35, size.width * 0.45),
+                imageList: imageList[0],
+                angle: -19,
+                margin: const EdgeInsets.only(right: 200, top: 50),
+              ),
+              DownloadsImageWidget(
+                size: Size(size.width * 0.39, size.width * 0.52),
+                imageList: imageList[1],
+                radius: 8,
+                margin: const EdgeInsets.only(top: 30),
+              ),
             ],
           ),
-          const Text("Introducing Downloads for you"),
-          const Text(
-              "We'll download a personalized selection of movies and shows for you, so there's always something to watch on your phone."),
-          Container(
-            width: size.width,
-            height: size.width,
-            //color: Colors.white,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  radius: size.width * 0.37,
-                ),
-                DownloadsImageWidget(
-                  size: Size(size.width * 0.4, size.width * 0.58),
-                  imageList: imageList[2],
-                  angle: 20,
-                  margin: const EdgeInsets.only(left: 130, bottom: 50),
-                ),
-                DownloadsImageWidget(
-                  size: Size(size.width * 0.4, size.width * 0.58),
-                  imageList: imageList[0],
-                  angle: -20,
-                  margin: const EdgeInsets.only(right: 130, bottom: 50),
-                ),
-                DownloadsImageWidget(
-                  size: Size(size.width * 0.45, size.width * 0.64),
-                  imageList: imageList[1],
-                  radius: 25,
-                  margin: const EdgeInsets.only(bottom: 10),
-                ),
-              ],
-            ),
-          ),
-          MaterialButton(
+        ),
+      ],
+    );
+  }
+}
+
+class Section3 extends StatelessWidget {
+  const Section3({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          child: MaterialButton(
             color: buttoncolorblue,
             onPressed: () {},
-            child: const Text(
-              "Set up",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.0),
+              child: Text(
+                "Set up",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
-          const SizedBox(
-            height: 15,
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        MaterialButton(
+          color: kcolorwhite,
+          onPressed: () {},
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
           ),
-          MaterialButton(
-            color: kcolorwhite,
-            onPressed: () {},
-            child: const Text(
+          child: const Padding(
+            padding: EdgeInsets.symmetric(vertical: 10.0),
+            child: Text(
               "See what you can download",
               style: TextStyle(
                 color: kblackColor,
@@ -95,8 +149,27 @@ class ScreenDownloads extends StatelessWidget {
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
+    );
+  }
+}
+
+class _SmartDownloads extends StatelessWidget {
+  const _SmartDownloads({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [
+        Icon(
+          Icons.settings,
+          //color: kcolorwhite,
+        ),
+        Text("Smart Downloads"),
+      ],
     );
   }
 }
@@ -119,21 +192,24 @@ class DownloadsImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Transform.rotate(
-      angle: angle * pi / 180,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(radius),
-        child: Container(
-          margin: margin,
-          width: size.width,
-          height: size.height,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(radius),
-            image: DecorationImage(
-              image: NetworkImage(
-                imageList,
+    return Padding(
+      padding: margin,
+      child: Transform.rotate(
+        angle: angle * pi / 180,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(radius),
+          child: Container(
+            //margin: margin,
+            width: size.width,
+            height: size.height,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(radius),
+              image: DecorationImage(
+                image: NetworkImage(
+                  imageList,
+                ),
+                fit: BoxFit.cover,
               ),
-              //fit: BoxFit.cover,
             ),
           ),
         ),
