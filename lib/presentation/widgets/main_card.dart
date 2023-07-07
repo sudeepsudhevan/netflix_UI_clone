@@ -1,23 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constants.dart';
-import 'package:netflix_clone/presentation/widgets/main_title.dart';
-
-class ScreenHome extends StatelessWidget {
-  const ScreenHome({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          MainTitle(title: 'Released in the Past Year'),
-          kheight,
-          MainCard(),
-        ],
-      ),
-    );
-  }
-}
 
 class MainCard extends StatelessWidget {
   const MainCard({
