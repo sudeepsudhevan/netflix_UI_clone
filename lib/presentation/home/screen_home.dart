@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constants.dart';
+import 'package:netflix_clone/presentation/home/widgets/number_card.dart';
+import 'package:netflix_clone/presentation/home/widgets/number_title_card.dart';
+
+import 'package:netflix_clone/presentation/widgets/main_card.dart';
 import 'package:netflix_clone/presentation/widgets/main_title.dart';
+import 'package:netflix_clone/presentation/widgets/main_title_card.dart';
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});
@@ -8,34 +13,22 @@ class ScreenHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          MainTitle(title: 'Released in the Past Year'),
-          kheight,
-          MainCard(),
-        ],
-      ),
-    );
-  }
-}
+      body: Padding(
+        padding: EdgeInsets.all(10.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              MainTitleCard(title: 'Released in the Past Year'),
+              MainTitleCard(title: 'Trending Now'),
 
-class MainCard extends StatelessWidget {
-  const MainCard({
-    super.key,
-  });
+              // middle section
+              NumberTitleCard(),
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 150,
-      height: 250,
-      decoration: BoxDecoration(
-        borderRadius: kborderRadius20,
-        image: const DecorationImage(
-          image: NetworkImage(
-            'https://image.tmdb.org/t/p/w1280/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg',
+              //middle section end
+              MainTitleCard(title: 'Tense Drama'),
+              MainTitleCard(title: 'South Indian Cinema'),
+            ],
           ),
-          fit: BoxFit.cover,
         ),
       ),
     );
