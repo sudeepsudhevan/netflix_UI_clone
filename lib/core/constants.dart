@@ -9,3 +9,9 @@ const kheight20 = SizedBox(height: 20);
 
 //Borderradius
 final BorderRadius kborderRadius10 = BorderRadius.all(Radius.circular(10));
+
+//Textstyle
+TextStyle kHomeTitletextstyle = const TextStyle(
+  fontSize: 14,
+  fontWeight: FontWeight.bold,
+);
