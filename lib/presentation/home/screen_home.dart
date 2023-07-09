@@ -61,9 +61,9 @@ class ScreenHome extends StatelessWidget {
                       //color: Colors.black.withOpacity(0.3),
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          stops: [0.2, 0.9],
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft,
+                          stops: [0.3, 0.9],
                           colors: [
                             Colors.black,
                             Colors.transparent,
