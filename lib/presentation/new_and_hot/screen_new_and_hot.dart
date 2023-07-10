@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constants.dart';
+import 'package:netflix_clone/presentation/home/widgets/custom_button_widget.dart';
+import 'package:netflix_clone/presentation/new_and_hot/widgets/coming_soon_widget.dart';
+import 'package:netflix_clone/presentation/new_and_hot/widgets/everyones_watching_widget.dart';
 import 'package:netflix_clone/presentation/widgets/app_bar_widget.dart';
+import 'package:netflix_clone/presentation/widgets/video_widget.dart';
 
 class ScreenNewAndHot extends StatelessWidget {
   const ScreenNewAndHot({super.key});
@@ -59,22 +63,30 @@ class ScreenNewAndHot extends StatelessWidget {
           ),
         ),
         body: TabBarView(children: [
-          _buildTabBarView("Coming Soon"),
-          _buildTabBarView("Everyone's Watching"),
+          _buildComingSoon(),
+          _buildEveryoneWatching(),
         ]),
       ),
     );
   }
 
-  _buildTabBarView(String name) {
-    return Center(
-      child: Text(
-        name,
-        style: const TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+  Widget _buildComingSoon() {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: 10,
+      itemBuilder: (ctx, index) {
+        return const ComingSoonWidget();
+      },
+    );
+  }
+
+  Widget _buildEveryoneWatching() {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: 10,
+      itemBuilder: (ctx, index) {
+        return const EveryonesWatchingWidget();
+      },
     );
   }
 }

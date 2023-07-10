@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const kwidth = SizedBox(width: 10);
+const kwidth20 = SizedBox(width: 20);
 const kcolorwhite = Colors.white;
 const buttoncolorblue = Color.fromARGB(246, 3, 21, 177);
 const kblackColor = Colors.black;
