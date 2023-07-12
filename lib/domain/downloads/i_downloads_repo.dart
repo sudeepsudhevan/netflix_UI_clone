@@ -6,6 +6,4 @@ abstract class IDownloadsRepo {
   Future<Either<MainFailure, List<Downloads>>> getDownloadsImages();
 }
 
-
-
 // dart run build_runner watch --use-polling-watcher --delete-conflicting-outputs

@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -20,13 +17,13 @@ class DownloadsRepository implements IDownloadsRepo {
         final downloadsList = (response.data['results'] as List).map((e) {
           return Downloads.fromJson(e);
         }).toList();
-
+        // print(downloadsList);
         return right(downloadsList);
       } else {
         return const Left(MainFailure.serverFailure());
       }
-    } catch (e) {
-      print(e);
+    } catch (_) {
+      // print(e);
       return const Left(MainFailure.clientFailure());
     }
   }

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constants.dart';
-import 'package:netflix_clone/presentation/home/widgets/custom_button_widget.dart';
 import 'package:netflix_clone/presentation/new_and_hot/widgets/coming_soon_widget.dart';
 import 'package:netflix_clone/presentation/new_and_hot/widgets/everyones_watching_widget.dart';
-import 'package:netflix_clone/presentation/widgets/app_bar_widget.dart';
-import 'package:netflix_clone/presentation/widgets/video_widget.dart';
 
 class ScreenNewAndHot extends StatelessWidget {
   const ScreenNewAndHot({super.key});

@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:netflix_clone/core/constants.dart';
 import 'package:netflix_clone/presentation/home/widgets/background_card.dart';
-import 'package:netflix_clone/presentation/home/widgets/custom_button_widget.dart';
-import 'package:netflix_clone/presentation/home/widgets/number_card.dart';
+
 import 'package:netflix_clone/presentation/home/widgets/number_title_card.dart';
 
-import 'package:netflix_clone/presentation/widgets/main_card.dart';
-import 'package:netflix_clone/presentation/widgets/main_title.dart';
 import 'package:netflix_clone/presentation/widgets/main_title_card.dart';
 
 ValueNotifier<bool> ScrollingNotifier = ValueNotifier<bool>(true);
@@ -74,7 +71,7 @@ class ScreenHome extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Image(
+                              const Image(
                                 width: 60,
                                 height: 60,
                                 image: AssetImage(
