@@ -16,31 +16,33 @@ class EveryonesWatchingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(
-            "The Eternals",
-            style: TextStyle(
+            movieName,
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nisl eu nunc.",
-            style: TextStyle(
+            description,
+            maxLines: 4,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
               color: Colors.grey,
             ),
           ),
         ),
         kheight,
         VideoWidget(
-          url: "https://i.ytimg.com/vi/0WVDKZJkGlY/maxresdefault.jpg",
+          url: posterPath,
         ),
         kheight,
         Row(

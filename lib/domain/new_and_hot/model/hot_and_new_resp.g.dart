@@ -30,14 +30,18 @@ HotAndNewData _$HotAndNewDataFromJson(Map<String, dynamic> json) =>
       originalName: json['original_name'] as String?,
       overview: json['overview'] as String?,
       posterPath: json['poster_path'] as String?,
-    );
+    )
+      ..releaseDate = json['release_date'] as String?
+      ..originalTitle = json['original_title'] as String?;
 
 Map<String, dynamic> _$HotAndNewDataToJson(HotAndNewData instance) =>
     <String, dynamic>{
+      'release_date': instance.releaseDate,
       'backdrop_path': instance.backdropPath,
       'first_air_date': instance.firstAirDate,
       'id': instance.id,
       'original_language': instance.originalLanguage,
+      'original_title': instance.originalTitle,
       'original_name': instance.originalName,
       'overview': instance.overview,
       'poster_path': instance.posterPath,

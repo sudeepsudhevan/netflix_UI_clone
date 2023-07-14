@@ -23,6 +23,9 @@ class HotAndNewResp {
 
 @JsonSerializable()
 class HotAndNewData {
+  @JsonKey(name: 'release_date')
+  String? releaseDate;
+
   @JsonKey(name: 'backdrop_path')
   String? backdropPath;
 
@@ -34,6 +37,10 @@ class HotAndNewData {
 
   @JsonKey(name: 'original_language')
   String? originalLanguage;
+
+  @JsonKey(name: 'original_title')
+  String? originalTitle;
+
   @JsonKey(name: 'original_name')
   String? originalName;
 
