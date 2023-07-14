@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class VideoWidget extends StatelessWidget {
+  final String url;
   const VideoWidget({
     super.key,
+    required this.url,
   });
 
   @override
@@ -13,7 +15,7 @@ class VideoWidget extends StatelessWidget {
           width: double.infinity,
           height: 200,
           child: Image.network(
-            "https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/6Z0FhoZM56YkuXhvklMTpc7rc5u.jpg",
+            url,
             fit: BoxFit.cover,
           ),
         ),

@@ -4,8 +4,20 @@ import 'package:netflix_clone/presentation/home/widgets/custom_button_widget.dar
 import 'package:netflix_clone/presentation/widgets/video_widget.dart';
 
 class ComingSoonWidget extends StatelessWidget {
+  final String id;
+  final String month;
+  final String day;
+  final String posterPath;
+  final String movieName;
+  final String description;
   const ComingSoonWidget({
     super.key,
+    required this.id,
+    required this.month,
+    required this.day,
+    required this.posterPath,
+    required this.movieName,
+    required this.description,
   });
 
   @override
@@ -13,7 +25,7 @@ class ComingSoonWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Row(
       children: [
-        const SizedBox(
+        SizedBox(
           width: 50,
           height: 450,
           child: Column(
@@ -21,15 +33,15 @@ class ComingSoonWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "NOV",
-                style: TextStyle(
+                month,
+                style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 16,
                 ),
               ),
               Text(
-                "12",
-                style: TextStyle(
+                day,
+                style: const TextStyle(
                   fontSize: 30,
                   letterSpacing: 4,
                   fontWeight: FontWeight.bold,
@@ -41,56 +53,62 @@ class ComingSoonWidget extends StatelessWidget {
         SizedBox(
           width: size.width - 50,
           height: 450,
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              VideoWidget(),
+              VideoWidget(
+                url: posterPath,
+              ),
               Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "The Eternals",
-                    style: TextStyle(
-                      letterSpacing: -2,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: FittedBox(
+                      child: Text(
+                        movieName,
+                        maxLines: 1,
+                        overflow: TextOverflow.clip,
+                        style: const TextStyle(
+                          //letterSpacing: -2,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
-                  Spacer(),
-                  Row(
-                    children: [
-                      CustomButtonWidget(
-                        icon: Icons.notifications_none,
-                        title: "Remind Me",
-                        iconSize: 20,
-                        textSize: 12,
-                      ),
-                      kwidth20,
-                      CustomButtonWidget(
-                        icon: Icons.info_outline,
-                        title: "Info",
-                        iconSize: 20,
-                        textSize: 12,
-                      ),
-                      kwidth,
-                    ],
-                  )
+                  CustomButtonWidget(
+                    icon: Icons.notifications_none,
+                    title: "Remind Me",
+                    iconSize: 20,
+                    textSize: 12,
+                  ),
+                  kwidth20,
+                  CustomButtonWidget(
+                    icon: Icons.info_outline,
+                    title: "Info",
+                    iconSize: 20,
+                    textSize: 12,
+                  ),
+                  kwidth
                 ],
               ),
               kheight,
-              Text("Coming on Friday"),
+              Text("coming on $day $month"),
               kheight,
               Text(
-                "The Eternals",
-                style: TextStyle(
+                movieName,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
               ),
               kheight,
               Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam nisl nisl eu nunc.",
-                style: TextStyle(
+                description,
+                maxLines: 4,
+                style: const TextStyle(
                   color: Colors.grey,
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/application/fast_laugh/fast_laugh_bloc.dart';
+import 'package:netflix_clone/application/hot_and_new/hot_and_new_bloc.dart';
 import 'package:netflix_clone/application/search/search_bloc.dart';
 import 'package:netflix_clone/core/colors/colors.dart';
 import 'package:netflix_clone/domain/core/di/injectable.dart';
@@ -32,13 +33,16 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (ctx) => getIt<FastLaughBloc>(),
         ),
+        BlocProvider(
+          create: (ctx) => getIt<HotAndNewBloc>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Netflix Clone',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
-          colorScheme: ColorScheme.dark(),
+          colorScheme: const ColorScheme.dark(),
           scaffoldBackgroundColor: backgroundColor,
           fontFamily: GoogleFonts.montserrat().fontFamily,
           textTheme: const TextTheme(

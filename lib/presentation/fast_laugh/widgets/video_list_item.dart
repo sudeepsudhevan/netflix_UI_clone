@@ -2,18 +2,19 @@ import 'dart:math';
 
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netflix_clone/application/fast_laugh/fast_laugh_bloc.dart';
 import 'package:netflix_clone/core/constants.dart';
 import 'package:netflix_clone/domain/downloads/models/downloads.dart';
 import 'package:video_player/video_player.dart';
+import 'package:share_plus/share_plus.dart';
 
 class VideoListItemInheritedWidget extends InheritedWidget {
-  final Widget widget;
+  //final Widget widget;
   final Downloads moviedata;
 
   const VideoListItemInheritedWidget(
-      {required this.widget, required this.moviedata, super.key})
-      : super(child: widget);
+      {required super.child, required this.moviedata, super.key});
 
   @override
   bool updateShouldNotify(covariant VideoListItemInheritedWidget oldWidget) {
@@ -34,7 +35,7 @@ class VideoListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final posterPath =
         VideoListItemInheritedWidget.of(context)?.moviedata.posterPath;
-    final videoUrl = dummyvideoUrls[Random().nextInt(dummyvideoUrls.length)];
+    final videoUrl = dummyvideoUrls[index % (dummyvideoUrls.length)];
     return Stack(
       children: [
         FastLaughVideoPlayer(
@@ -74,11 +75,50 @@ class VideoListItem extends StatelessWidget {
                             : NetworkImage('$imageAppendUrl$posterPath'),
                       ),
                     ),
-                    VideoActionsWidget(
-                        icon: Icons.emoji_emotions, title: 'LOL'),
-                    VideoActionsWidget(icon: Icons.add, title: 'My List'),
-                    VideoActionsWidget(icon: Icons.share, title: 'Share'),
-                    VideoActionsWidget(icon: Icons.play_arrow, title: 'Play')
+                    ValueListenableBuilder(
+                        valueListenable: likedVideosIdsNotifier,
+                        builder: (BuildContext c, Set<int> newLikedListIds,
+                            Widget? _) {
+                          final _index = index;
+                          if (newLikedListIds.contains(_index)) {
+                            return GestureDetector(
+                              onTap: () {
+                                likedVideosIdsNotifier.value.remove(_index);
+                                likedVideosIdsNotifier.notifyListeners();
+                              },
+                              child: const VideoActionsWidget(
+                                icon: Icons.favorite_outline,
+                                title: 'Liked',
+                              ),
+                            );
+                          }
+                          return GestureDetector(
+                            onTap: () {
+                              likedVideosIdsNotifier.value.add(_index);
+                              likedVideosIdsNotifier.notifyListeners();
+                            },
+                            child: const VideoActionsWidget(
+                                icon: Icons.emoji_emotions, title: 'LOL'),
+                          );
+                        }),
+                    const VideoActionsWidget(icon: Icons.add, title: 'My List'),
+                    GestureDetector(
+                      onTap: () {
+                        final movieName =
+                            VideoListItemInheritedWidget.of(context)
+                                ?.moviedata
+                                .title;
+                        if (movieName != null) {
+                          Share.share(movieName);
+                        }
+                      },
+                      child: const VideoActionsWidget(
+                        icon: Icons.share,
+                        title: 'Share',
+                      ),
+                    ),
+                    const VideoActionsWidget(
+                        icon: Icons.play_arrow, title: 'Play')
                   ],
                 )
               ],
@@ -134,13 +174,14 @@ class _FastLaughVideoPlayerState extends State<FastLaughVideoPlayer> {
 
   @override
   void initState() {
+    super.initState();
     _videoPlayerController =
         VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl));
 
     _videoPlayerController.initialize().then((value) {
       setState(() {});
+      _videoPlayerController.play();
     });
-    super.initState();
   }
 
   @override
@@ -157,5 +198,11 @@ class _FastLaughVideoPlayerState extends State<FastLaughVideoPlayer> {
               child: CircularProgressIndicator(),
             ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _videoPlayerController.dispose();
   }
 }
