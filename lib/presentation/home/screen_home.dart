@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,6 +55,7 @@ class ScreenHome extends StatelessWidget {
                   final _releasedPastYear = state.pastYearMovieList.map((e) {
                     return '$imageAppendUrl${e.posterPath}';
                   }).toList();
+                  //_releasedPastYear.shuffle(Random());
 // trending now
                   final _trendingNow = state.trendingMovieList.map((e) {
                     return '$imageAppendUrl${e.posterPath}';
@@ -61,7 +64,7 @@ class ScreenHome extends StatelessWidget {
                   final _tenseDrama = state.tenseDramaMovieList.map((e) {
                     return '$imageAppendUrl${e.posterPath}';
                   }).toList();
-                  _tenseDrama.shuffle();
+                  //_tenseDrama.shuffle();
 // south asian
                   final _southAsian = state.southAsianMovieList.map((e) {
                     return '$imageAppendUrl${e.posterPath}';
@@ -74,10 +77,11 @@ class ScreenHome extends StatelessWidget {
 
                   return ListView(
                     children: [
-                      BackgroundCard(
-                        coverimageUrl:
-                            '$imageAppendUrl${state.trendingMovieList[0].posterPath}',
-                      ),
+                      if (state.trendingMovieList.isNotEmpty)
+                        BackgroundCard(
+                          coverimageUrl:
+                              '$imageAppendUrl${state.trendingMovieList[0].posterPath}',
+                        ),
                       if (_releasedPastYear.length >= 10)
                         MainTitleCard(
                           title: 'Released in the Past Year',
