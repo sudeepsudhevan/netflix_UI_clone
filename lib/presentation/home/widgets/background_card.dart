@@ -6,7 +6,9 @@ import 'package:netflix_clone/presentation/home/widgets/custom_button_widget.dar
 class BackgroundCard extends StatelessWidget {
   const BackgroundCard({
     super.key,
+    required this.coverimageUrl,
   });
+  final String coverimageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +19,9 @@ class BackgroundCard extends StatelessWidget {
           height: 550,
           decoration: BoxDecoration(
             //borderRadius: kborderRadius10,
-            image: const DecorationImage(
+            image: DecorationImage(
               image: NetworkImage(
-                'https://image.tmdb.org/t/p/w1280/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg',
+                coverimageUrl,
               ),
               fit: BoxFit.cover,
             ),

@@ -129,7 +129,7 @@ class ComingSoonList extends StatelessWidget {
                       .first
                       .substring(0, 3)
                       .toUpperCase();
-                  day = formatedDate.split(' ')[1];
+                  day = movie.releaseDate!.split('-')[1];
                 } catch (_) {
                   month = '';
                   day = '';
@@ -138,7 +138,7 @@ class ComingSoonList extends StatelessWidget {
                   id: movie.id.toString(),
                   month: month,
                   day: day,
-                  posterPath: '$imageAppendUrl${movie.posterPath}',
+                  posterPath: '$imageAppendUrl${movie.backdropPath}',
                   movieName: movie.originalTitle ?? 'No title',
                   description: movie.overview ?? 'No description',
                 );
@@ -194,7 +194,7 @@ class EveryonesWatchingList extends StatelessWidget {
                 final tv = state.everyOneIsWatchingList[index];
 
                 return EveryonesWatchingWidget(
-                  posterPath: '$imageAppendUrl${tv.posterPath}',
+                  posterPath: '$imageAppendUrl${tv.backdropPath}',
                   movieName: tv.originalName ?? 'No title',
                   description: tv.overview ?? 'No description',
                 );

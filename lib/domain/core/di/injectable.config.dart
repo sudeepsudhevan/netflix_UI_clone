@@ -14,9 +14,10 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:netflix_clone/application/downloads/downloads_bloc.dart' as _i9;
 import 'package:netflix_clone/application/fast_laugh/fast_laugh_bloc.dart'
     as _i10;
+import 'package:netflix_clone/application/home/home_bloc.dart' as _i11;
 import 'package:netflix_clone/application/hot_and_new/hot_and_new_bloc.dart'
-    as _i11;
-import 'package:netflix_clone/application/search/search_bloc.dart' as _i12;
+    as _i12;
+import 'package:netflix_clone/application/search/search_bloc.dart' as _i13;
 import 'package:netflix_clone/domain/downloads/i_downloads_repo.dart' as _i5;
 import 'package:netflix_clone/domain/new_and_hot/hot_and_new_service.dart'
     as _i3;
@@ -45,9 +46,10 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i9.DownloadsBloc(gh<_i5.IDownloadsRepo>()));
     gh.factory<_i10.FastLaughBloc>(
         () => _i10.FastLaughBloc(gh<_i5.IDownloadsRepo>()));
-    gh.factory<_i11.HotAndNewBloc>(
-        () => _i11.HotAndNewBloc(gh<_i3.HotAndNewService>()));
-    gh.factory<_i12.SearchBloc>(() => _i12.SearchBloc(
+    gh.factory<_i11.HomeBloc>(() => _i11.HomeBloc(gh<_i3.HotAndNewService>()));
+    gh.factory<_i12.HotAndNewBloc>(
+        () => _i12.HotAndNewBloc(gh<_i3.HotAndNewService>()));
+    gh.factory<_i13.SearchBloc>(() => _i13.SearchBloc(
           gh<_i7.SearchService>(),
           gh<_i5.IDownloadsRepo>(),
         ));
